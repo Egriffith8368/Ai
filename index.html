@@ -1,121 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ChatGPT Integration</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
 
-      #chat-container {
-        width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f2f2f2;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      }
+<script>
+    function getGptResponse() {
+        var prompt = prompt("Enter your prompt:");
+        if (prompt != null) {
+            var apiEndpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions'; // Replace with your desired API endpoint
+            var apiKey = prompt("Enter secure token key here"); // Replace with your OpenAI API key
 
-      .chat-log {
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #ffffff;
-        border-radius: 4px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      }
+            axios.post(apiEndpoint, {
+                'prompt': prompt,
+                'max_tokens': 50, // Adjust as needed
+                'temperature': 0.7 // Adjust as needed
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + apiKey
+                }
+            })
+                .then(function (response) {
+                    alert("GPT Response:\n" + response.data.choices[0].text);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+</script>
 
-      .user {
-        text-align: right;
-        color: #444444;
-      }
+<button onclick="getGptResponse()">Continue</button>
 
-      .ai {
-        text-align: left;
-        color: #444444;
-      }
-
-      #user-input-container {
-        display: flex;
-        align-items: center;
-        background-color: #333333;
-        border-radius: 4px;
-        padding: 8px;
-        margin-bottom: 10px;
-      }
-
-      #user-input {
-        flex-grow: 1;
-        padding: 8px;
-        border: none;
-        border-radius: 4px;
-        background-color: #ffffff;
-        color: #333333;
-        margin-right: 10px;
-      }
-
-      #send-button {
-        background-color: #2196f3;
-        color: #ffffff;
-        border: none;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      #send-button:hover {
-        background-color: #0d8add;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="chat-container">
-      <div class="chat-log" id="chat-log"></div>
-      <div id="user-input-container">
-        <input type="text" id="user-input" placeholder="Type your message..." />
-        <button id="send-button" onclick="sendMessage()">&#10148;</button>
-      </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-      const OPENAI_API_KEY = prompt("Enter Secure token key here"); // Replace with your OpenAI API key
-
-      // Function to send user message and get AI response
-      function sendMessage() {
-        const userInput = prompt("How can i assit you?;
-
-        // Send user message to OpenAI API
-        $.ajax({
-          type: 'POST',
-          url: 'https://api.openai.com/v1/chat/completions',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + OPENAI_API_KEY,
-          },
-          data: JSON.stringify({
-            'messages': [{'role': 'system', 'content': 'You are a user'}, {'role': 'user', 'content': userInput}],
-          }),
-          success: function (data) {
-            const aiResponse = data.choices[0].message.content;
-            appendMessage('ai', aiResponse);
-          },
-          error: function (error) {
-            console.error('Error:', error);
-          },
-        });
-      }
-
-      // Function to append a message to the chat log
-      function appendMessage(role, content) {
-        const chatLog = document.getElementById('chat-log');
-        const message = prompt('div');
-      }
-    </script>
-  </body>
+</body>
 </html>

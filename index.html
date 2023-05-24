@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat GPT</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        var apiKey = prompt("Enter your secure Griffithe AI token. If you do not have a token please visit dev.griffithe.com;
+
+        function getChatResponse() {
+            var userPrompt = document.getElementById("user-prompt").value;
+            var responseContainer = document.getElementById("response-container");
+
+            axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+                prompt: userPrompt,
+                max_tokens: 50,
+                temperature: 0.7
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + apiKey,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                var chatResponse = response.data.choices[0].text.trim();
+                responseContainer.textContent = chatResponse;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Griffithe AI</h1>
+    <form>
+        <label for="user-prompt">Enter your prompt:</label>
+        <input type="text" id="user-prompt" name="user-prompt" required>
+        <button type="button" onclick="getChatResponse()">Submit</button>
+    </form>
+
+    <div id="response-container"></div>
+</body>
+</html>
+;

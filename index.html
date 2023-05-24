@@ -88,8 +88,7 @@
 
       // Function to send user message and get AI response
       function sendMessage() {
-        const userInput = document.getElementById('user-input').value;
-        appendMessage('user', userInput);
+        const userInput = prompt("How can i assit you?;
 
         // Send user message to OpenAI API
         $.ajax({
@@ -115,10 +114,7 @@
       // Function to append a message to the chat log
       function appendMessage(role, content) {
         const chatLog = document.getElementById('chat-log');
-        const message = document.createElement('div');
-        message.classList.add(role);
-        message.innerText = content;
-        chatLog.appendChild(message);
+        const message = prompt('div');
       }
     </script>
   </body>

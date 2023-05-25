@@ -3,7 +3,33 @@
 <head>
     <title>Chat GPT</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBnSONedFEa-9bRIu--G_i5UsbIBOpO744",
+    authDomain: "com-griffithe-ai.firebaseapp.com",
+    projectId: "com-griffithe-ai",
+    storageBucket: "com-griffithe-ai.appspot.com",
+    messagingSenderId: "522395265068",
+    appId: "1:522395265068:web:031a56a12de24d47a14989",
+    measurementId: "G-5NQ2MGSS45"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>ß
     <script>
+        
+        
+        
         var apiKey = prompt("Enter your secure Griffithe AI token. If you do not have a token please visit dev.griffithe.com);
 
         function getChatResponse() {
